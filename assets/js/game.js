@@ -72,6 +72,7 @@ console.log(enemyNames[2]);
       window.alert(playerName + ' still has ' + playerHealth + ' health left.');
     }
   } 
+};
 
 
 
@@ -104,45 +105,17 @@ for(var i = 0; i < enemyNames.length; i++) {
 
       if (storeConfirm) {
         shop();
-
-        switch (shopOptionPrompt) {
-          case "refill":
-            window.alert("Refilling player's health by 20 for 7 dollars");
-
-            playerHealth = playerHealth + 20;
-            playerMoney= playerMoney - 7;
-            break;
-
-            case "upgrade":
-              window.alert("Upgrading player's attack by 6 for 7 dollars.");
-
-              playerAttack = playerAttack + 6;
-              playerMoney = playerMoney - 7;
-              break;
-
-              case "leave":
-                window.alert("Leaving the store.");
-                break;
-
-                default:
-                  window.alert("You did not pick a valid option. Try again.");
-
-                  shop();
-            break;
-        }
       }
     }
   }
- 
+
   else {
     window.alert('You have lost your robot in battle! Game Over!');
     break;
   }
 }
-}
 
 endGame();
-
 };
 
 var endGame = function() {
@@ -156,10 +129,6 @@ var endGame = function() {
 
   var playAgainConfirm = window.confirm("Would you like to play again?");
 
-  var shop = function() {
-    console.log("entered the shop");
-  };
-
   if (playAgainConfirm) {
     startGame();
 
@@ -170,5 +139,50 @@ var endGame = function() {
   }
 
 };
+var shop = function() {
+  console.log("entered the shop");
+  var shopOptionPrompt = window.prompt('Would you like to REFILL you health, UPGRADE your attack, or LEAVE the store? Please enter "REFILL", "UPGRADE", or "LEAVE" to make a choice.');
 
-fight();
+        switch (shopOptionPrompt) {
+          case "refill":
+          case "REFILL":
+            if (playerMoney >= 7){
+            window.alert("Refilling player's health by 20 for 7 dollars");
+
+            playerHealth = playerHealth + 20;
+            playerMoney= playerMoney - 7;
+            }
+            else {
+              window.alert("You don't have enough money!")
+            }
+            break;
+
+            case "upgrade":
+            case "UPGRADE":
+              if (playerMoney >= 7) {
+                
+              window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+              playerAttack = playerAttack + 6;
+              playerMoney = playerMoney - 7;
+              }
+              else {
+                window.alert("you don't have enough money!")
+              }
+              break;
+
+              case "leave":
+              case "LEAVE":
+                window.alert("Leaving the store.");
+                break;
+
+                default:
+                  window.alert("You did not pick a valid option. Try again.");
+
+                  shop();
+            break;
+        }
+      };
+
+
+startGame();
