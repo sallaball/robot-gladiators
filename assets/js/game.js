@@ -67,14 +67,14 @@ console.log(enemyNames[2]);
     if (playerHealth <= 0) {
       window.alert(playerName + ' has died!');
       // leave while() loop if player is dead
-      break;
+     break; 
     } else {
       window.alert(playerName + ' still has ' + playerHealth + ' health left.');
     }
-  } // end of while loop
- // end of fight function
+  } 
 
-//function to start a new game
+
+
 var startGame = function() {
 
   playerHealth = 100;
@@ -85,7 +85,7 @@ var startGame = function() {
   
 
 // fight each enemy-robot by looping over them and fighting them one at a time
-for(var i = 0; i < 3; i++) {
+for(var i = 0; i < enemyNames.length; i++) {
 
 
   fight(enemyNames[i]);
@@ -96,12 +96,49 @@ for(var i = 0; i < 3; i++) {
     var pickedEnemyName = enemyNames[i];
     enemyHealth = 50;
     fight(pickedEnemyName);
+
+    if (playerHealth > 0 && i < enemyNames.length - 1) {
+  
+      var storeConfirm = window.prompt(
+        "The fight is over, visit the store before the next round?");
+
+      if (storeConfirm) {
+        shop();
+
+        switch (shopOptionPrompt) {
+          case "refill":
+            window.alert("Refilling player's health by 20 for 7 dollars");
+
+            playerHealth = playerHealth + 20;
+            playerMoney= playerMoney - 7;
+            break;
+
+            case "upgrade":
+              window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+              playerAttack = playerAttack + 6;
+              playerMoney = playerMoney - 7;
+              break;
+
+              case "leave":
+                window.alert("Leaving the store.");
+                break;
+
+                default:
+                  window.alert("You did not pick a valid option. Try again.");
+
+                  shop();
+            break;
+        }
+      }
+    }
   }
  
   else {
     window.alert('You have lost your robot in battle! Game Over!');
     break;
   }
+}
 }
 
 endGame();
@@ -115,11 +152,17 @@ var endGame = function() {
   else {
     window.alert("You've lost your robot in battle.")
   }
+  
 
   var playAgainConfirm = window.confirm("Would you like to play again?");
 
+  var shop = function() {
+    console.log("entered the shop");
+  };
+
   if (playAgainConfirm) {
     startGame();
+
 
   }
   else {
@@ -127,6 +170,5 @@ var endGame = function() {
   }
 
 };
-    };
 
 fight();
