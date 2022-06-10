@@ -5,12 +5,7 @@ var randomNumber = function(min, max) {
 };
 
 
-
-
-
-
-
-    var fight = function(enemy) {
+ var fight = function(enemy) {
       while (playerInfo.health > 0 && enemy.health > 0) {
     // ask player if they'd like to fight or run
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
@@ -75,14 +70,12 @@ var startGame = function() {
 
  playerInfo.reset();
 
-// fight each enemy-robot by looping over them and fighting them one at a time
-for (var i = 0; i < enemyInfo.lenght; i++) {
-
+  // fight each enemy-robot by looping over them and fighting them one at a time
+for (var i = 0; i < enemyInfo.length; i++) {
  // if player is still alive, keep fighting
   if (playerInfo.health > 0) {
     
     window.alert('Welcome to Robot Gladiators! Round ' + (i + 1));
-    debugger;
     var pickedEnemyObj = enemyInfo[i];
     pickedEnemyObj.health = randomNumber(40, 60);
     fight(pickedEnemyObj);
@@ -122,9 +115,8 @@ var endGame = function() {
     startGame();
 
 
-  }
-  else {
-    window.alert("Thank you for playing Robot Gladiators! Come back soon!")
+  } else {
+    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
   }
 
 };
@@ -155,8 +147,17 @@ var shop = function() {
         }
       };
 
+      var getPlayerName = function() {
+        var name = "";
+        while (name === "" || name === null) {
+          name = prompt("What is your robot's name?");
+        }
+
+        return name;
+      }
+
       var playerInfo = {
-        name: window.prompt("What is your robot's name?"),
+        name: getPlayerName(),
         health: 100,
         attack: 10,
         money: 10,
@@ -167,6 +168,7 @@ var shop = function() {
         },
         refillHealth: function() {
           if (this.money >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.");
           this.health += 20;
           this.money -= 7;
         }
@@ -181,30 +183,31 @@ var shop = function() {
           this.money -= 7;
         }
         else {
-          window.alert("You don't have enough money!");
+          window.alert("you don't have enough money!");
         }
       }
       };
       
       var enemyInfo = [
         {
-          name: 'Roborto',
+          name: "Roborto",
           attack: randomNumber(10, 14)
         },
         {
-          name: 'Amy Android',
+          name: "Amy Android",
           attack: randomNumber(10, 14)
       
         },
         {
-          name: 'Robo Trumble',
+          name: "Robo Trumble",
           attack: randomNumber(10, 14)
       
         }
       ];
+
       console.log(enemyInfo);
-      console.log(enemyInfo[0]);
-      console.log(enemyInfo[0].name);
-      console.log(enemyInfo[0]['attack']);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]['attack']);
 
 startGame();
