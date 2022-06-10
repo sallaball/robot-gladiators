@@ -4,14 +4,40 @@ var randomNumber = function(min, max) {
   return value;
 };
 
+var fightOrSkip = function() {
 
- var fight = function(enemy) {
-      while (playerInfo.health > 0 && enemy.health > 0) {
+  var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+  if (confirmSkip) {
+    window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+    playerInfo.money = math.max(0, playerInfo.money - 10);
+
+    return true;
+  }
+  
+    if(promptFight === "" || promptFight === null) {
+      window.alert("You need to provide a valid answer! Please try again.");
+  
+      return fightOrSkip();
+    }
+  }
+ 
+  var fight = function(enemy) {
     // ask player if they'd like to fight or run
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+  
+    
+      while (playerInfo.health > 0 && enemy.health > 0) {
+        if (fightOrSkip()) {
+        var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+      
 
+      return false;
+      }
+
+    
+      promptFight = promptFight.toLowerCase();
     // if player picks "skip" confirm and then stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
+    if (promptFight === "skip") {
       // confirm player wants to skip
       var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
@@ -24,6 +50,8 @@ var randomNumber = function(min, max) {
        break;
       }
     }
+  }
+
 
     // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
@@ -39,9 +67,10 @@ var randomNumber = function(min, max) {
       // award player money for winning
       playerInfo.money = playerInfo.money + 20;
 
-      // leave while() loop since enemy is dead
-      break;
-    } else {
+      // leave while() loop since enemy is dea
+      break; 
+    }
+     else {
       window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
     }
 
@@ -61,8 +90,9 @@ var randomNumber = function(min, max) {
     } else {
       window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
     }
-  } 
-};
+  };
+  
+
 
 
 
