@@ -73,7 +73,7 @@ var fightOrSkip = function() {
       else {
         var damage = randomNumber(enemy.attack - 3, enemy.attack);
 
-        playerInfo.health = Math.max(0,  playerInfo.health - damange);
+        playerInfo.health = Math.max(0,  playerInfo.health - damage);
         console.log(
           enemy.name +
             " attacked " +
@@ -145,12 +145,12 @@ var endGame = function() {
     localStorage.setItem("name", playerInfo.name);
     window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".");
   }
-  else {
-    window.alert("You've lost your robot in battle!");
-  }
-  
 
-  var playAgainConfirm = window.confirm("Would you like to play again?");
+  else {
+    alert(playerInfo.name + " did not beat the high score of " + highScore + " . Maybe next time!");
+  }
+
+    var playAgainConfirm = window.confirm("Would you like to play again?");
 
   if (playAgainConfirm) {
     startGame();
